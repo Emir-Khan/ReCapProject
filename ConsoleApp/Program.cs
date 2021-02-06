@@ -26,10 +26,10 @@ namespace ConsoleApp
                 Console.WriteLine(item.CarName);
             }
 
-            //EfCarDal carManager = new EfCarDal();
+     
 
-            //carManager.Add(new Car { Id = 6, BrandId = 6,CarName="kia", ColorId = 8, ModelYear = 2021, DailyPrice = 200000, Description = "2021 Model kia" });
-
+            //carManager.Delete(new Car { Id = 6, BrandId = 6, CarName = "kia", ColorId = 8, ModelYear = 2021, DailyPrice = 200000, Description = "2021 Model kia" });
+            // GETBYID,GETALL GElİŞTİR
         }
     }
 }

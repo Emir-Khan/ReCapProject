@@ -23,6 +23,18 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+            Console.WriteLine("Araba başarıyla silindi.");
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
+            Console.WriteLine("Araba başarıyla güncellendi.");
+        }
+
         public void Add(Car car)
         {
             _carDal.Add(car);
