@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,12 +15,18 @@ namespace Business.Concrete
 
         public CarManager(ICarDal carDal)
         {
-            _carDal = carDal;
+            _carDal = carDal;           
         }
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
+        }
+
+        public void Add(Car car)
+        {
+            _carDal.Add(car);
+            Console.WriteLine("Araba başarıyla eklendi.");
         }
     }
 }
