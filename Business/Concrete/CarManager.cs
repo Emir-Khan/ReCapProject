@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,16 @@ namespace Business.Concrete
         {
             _carDal.Add(car);
             Console.WriteLine("Araba başarıyla eklendi.");
+        }
+
+        public Car GetById(int id)
+        {
+            return _carDal.Get(c => c.Id == id);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }
