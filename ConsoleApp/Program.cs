@@ -42,7 +42,9 @@ namespace ConsoleApp
 
         private static void GetCarDetailsTest(CarManager carManager)
         {
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            foreach (var car in result.Data)
             {
                 Console.WriteLine($"ID: {car.CarId} ,Car Name: {car.CarName} ,Brand ID: {car.BrandId} ,Brand Name: {car.BrandName} ,Color ID: {car.ColorId} ,Color Name: {car.ColorName}");
             }
