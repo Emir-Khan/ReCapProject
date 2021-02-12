@@ -53,9 +53,9 @@ namespace ConsoleApp
             //rentalManager.Add(new Rental { Id = 1, CarId = 1, CustomerId = 1, RentDate = new DateTime(2019, 3, 25, 8, 50, 29), ReturnDate = new DateTime(2019, 3, 25, 19, 37, 51) });
             //userManager.Add(new User { Id = 1, FirstName = "Emirhan", LastName = "Köseoğlu", Email = "ajbfqeuo@gmail.com", Password = "!2a3456" });
 
-            //OnGarage(rentalManager);
+            OnGarage(rentalManager);
 
-            //NotOnGarage(rentalManager);
+            NotOnGarage(rentalManager);
 
         }
 
