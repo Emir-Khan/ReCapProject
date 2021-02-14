@@ -56,7 +56,7 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            _rentalDal.Add(rental);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUptated);
         }
     }
