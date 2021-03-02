@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -7,29 +9,43 @@ namespace Business.Constants
     public static class Messages
     {
         public static string CarAdded = "Araba eklendi";
-        internal static string CarUpdated = "Araba güncellendi";
-        internal static string CarDeleted ="Araba silindi";
+        public static string CarUpdated = "Araba güncellendi";
+        public static string CarDeleted = "Araba silindi";
 
-        internal static string ColorAdded = "Renk eklendi";
-        internal static string ColorUpdated = "Renk güncellendi";
-        internal static string ColorDeleted = "Renk silindi";
+        public static string ColorAdded = "Renk eklendi";
+        public static string ColorUpdated = "Renk güncellendi";
+        public static string ColorDeleted = "Renk silindi";
 
-        internal static string BrandAdded = "Marka eklendi";
-        internal static string BrandUpdated = "Marka güncellendi";
-        internal static string BrandDeleted = "Marka silindi";
+        public static string BrandAdded = "Marka eklendi";
+        public static string BrandUpdated = "Marka güncellendi";
+        public static string BrandDeleted = "Marka silindi";
 
-        internal static string UserAdded = "Kullanıcı eklendi";
-        internal static string UserUpdated = "Kullanıcı güncellendi";
-        internal static string UserDeleted = "Kullanıcı silindi";
+        public static string UserAdded = "Kullanıcı eklendi";
+        public static string UserUpdated = "Kullanıcı güncellendi";
+        public static string UserDeleted = "Kullanıcı silindi";
 
-        internal static string CustomerAdded = "Müşteri eklendi";
-        internal static string CustomerUpdated = "Müşteri güncellendi";
-        internal static string CustomerDeleted = "Müşteri silindi";
+        public static string CustomerAdded = "Müşteri eklendi";
+        public static string CustomerUpdated = "Müşteri güncellendi";
+        public static string CustomerDeleted = "Müşteri silindi";
 
-        internal static string RentalAdded = "Kiralama eklendi";
-        internal static string RentalUptated = "Kiralama güncellendi";
-        internal static string Rentaldeleted = "Kiralama silindi";
+        public static string RentalAdded = "Kiralama eklendi";
+        public static string RentalUptated = "Kiralama güncellendi";
+        public static string Rentaldeleted = "Kiralama silindi";
 
-        internal static string RentalDenied = "Kiralama geçersiz";
+        public static string RentalDenied = "Kiralama geçersiz";
+
+        public static string CarImageAdded = "Araba resimi eklendi";
+        public static string CarImageUpdated = "Araba resimi güncellendi";
+        public static string CarImageDeleted = "Araba resimi silindi";
+
+        public static string CarNameAlreadyExists = "Araba ismi mevcut";
+        public static string UserNotFound = "Email bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string UserAlreadyExsist = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kayıt başarılı";
+        public static string AccessTokenCreated ="JWT Created";
+        public static string AuthorizationDenied = "Reddedildi";
+        internal static string UserAlreadyExists;
     }
 }

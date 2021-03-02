@@ -63,5 +63,6 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUptated);
         }
+        
     }
 }
