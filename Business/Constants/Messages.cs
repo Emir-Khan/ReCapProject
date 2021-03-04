@@ -42,10 +42,11 @@ namespace Business.Constants
         public static string UserNotFound = "Email bulunamadı";
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Giriş başarılı";
-        public static string UserAlreadyExsist = "Bu kullanıcı zaten mevcut";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
         public static string UserRegistered = "Kayıt başarılı";
         public static string AccessTokenCreated ="JWT Created";
         public static string AuthorizationDenied = "Reddedildi";
-        internal static string UserAlreadyExists;
+
+        
     }
 }
