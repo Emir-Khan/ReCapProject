@@ -62,10 +62,30 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
         }
 
+        public IDataResult<List<CarDetailDto>> GetByColorId(int colorId)
+        {
+            var result = _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.ColorId == colorId));
+        }
+
+        public IDataResult<Car> GetByBrandId(int brandId)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.BrandId == brandId));
+        }
+
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByFilter(int colorId,int brandId)
+        {
+            var cars =_carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(cars.FindAll(p => p.BrandId == brandId&&p.ColorId==colorId));
+        }
+
+
+
         private IResult CheckIfProductNameExists(string carName)
         {
             var result = _carDal.GetAll(c => c.CarName == carName).Any();

@@ -6,6 +6,7 @@ using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,17 @@ namespace Business.Concrete
         public IDataResult<CarImage> GetById(int id)
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
+        }
+
+        public IDataResult<List<CarImageDetailDto>> GetByCarId(int id)
+        {
+            var img = _carImageDal.GetCarImageDetails();
+            return new SuccessDataResult<List<CarImageDetailDto>>(img.FindAll(c => c.CarId == id));
+        }
+
+        public IDataResult<List<CarImageDetailDto>> GetCarImageDetails()
+        {
+            return new SuccessDataResult<List<CarImageDetailDto>>(_carImageDal.GetCarImageDetails());
         }
 
         public IResult Update(CarImage carImage)

@@ -54,5 +54,44 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getcarimagebycarid")]
+        public IActionResult GetCarImageByCarId(int id)
+        {
+            var result = _carImageService.GetByCarId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result = _carImageService.GetById(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getfilebyid")]
+        public IActionResult GetFileById(int id)
+        {
+            var result = _carImageService.GetById(id);
+
+            if (result.Success)
+            {
+                var f = System.IO.File.ReadAllBytes(result.Data.ImagePath);
+                return File(f, "image/jpeg");
+            }
+
+            return BadRequest(result);
+        }
+
     }
 }
