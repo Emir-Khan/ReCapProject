@@ -7,6 +7,7 @@ namespace Entities.Concrete
 {
     public class Credit:IEntity
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string CardNumber { get; set; }
         public DateTime ExpiryDate { get; set; }

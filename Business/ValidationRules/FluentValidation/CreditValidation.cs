@@ -19,7 +19,7 @@ namespace Business.ValidationRules.FluentValidation
 
         private bool DateCheck(DateTime arg)
         {
-            var nowDate = DateTime.Now;
+            DateTime nowDate = DateTime.Now;
             if (arg > nowDate)
             {
                 return true;
