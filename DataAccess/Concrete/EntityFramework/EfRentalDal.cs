@@ -19,9 +19,10 @@ namespace DataAccess.Concrete.EntityFramework
                              join r in context.Rentals
                              on c.Id equals r.CarId
                              join u in context.Users
-                             on r.CustomerId equals u.Id
+                             on r.UserId equals u.Id
                              select new RentalDetailDto
                              {
+                                 Id=r.Id,
                                  CarId = c.Id,
                                  UserId = u.Id,
                                  CarName = c.CarName,

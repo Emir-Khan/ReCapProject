@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinsessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -45,10 +46,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
+        [SecuredOperation("admin,car.add")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-           var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
+            var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
             if (result!=null)
             {
                 return result;
@@ -57,9 +59,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
-        public IDataResult<Car> GetById(int id)
+        public IDataResult<List<CarDetailDto>> GetById(int id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
+            var result = _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.CarId == id));
+        }
+
+        public IDataResult<CarDetailDto> GetBySingleId(int id)
+        {
+            var result = _carDal.GetCarDetails();
+            return new SuccessDataResult<CarDetailDto>(result.Find(c => c.CarId == id));
         }
 
         public IDataResult<List<CarDetailDto>> GetByColorId(int colorId)
@@ -68,9 +77,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.ColorId == colorId));
         }
 
-        public IDataResult<Car> GetByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetByBrandId(int brandId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.BrandId == brandId));
+            var brand = _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(brand.FindAll(c => c.BrandId == brandId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -91,9 +101,9 @@ namespace Business.Concrete
             var result = _carDal.GetAll(c => c.CarName == carName).Any();
             if (result)
             {
-                return new SuccessResult(Messages.CarNameAlreadyExists);
+                return new ErrorResult(Messages.CarNameAlreadyExists);
             }
-            return new ErrorResult();
+            return new SuccessResult();
         }
     }
     

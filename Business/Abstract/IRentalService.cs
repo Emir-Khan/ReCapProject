@@ -14,6 +14,8 @@ namespace Business.Abstract
         IResult Delete(Rental rental);
         IResult Update(Rental rental);
         IResult Add(Rental rental);
-        IDataResult<Rental> GetById(int id);
+        IDataResult<RentalDetailDto> GetById(int id);
+
+        IResult IsRentable(Rental rental);
     }
 }

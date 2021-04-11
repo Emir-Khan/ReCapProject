@@ -42,6 +42,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getsingle")]
+        public IActionResult GetBySingleId(int id)
+        {
+            var result = _carService.GetBySingleId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getbycolorid")]
         public IActionResult GetByColorId(int colorId)
         {

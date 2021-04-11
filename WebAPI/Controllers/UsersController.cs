@@ -32,16 +32,16 @@ namespace WebAPI.Controllers
         //    return BadRequest(result);
         //}
 
-        //[HttpGet("get")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var result = _userService.GetById(id);
-        //    if (result.Success)
-        //    {
-        //        return Ok(result);
-        //    }
-        //    return BadRequest(result);
-        //}
+        [HttpGet("get")]
+        public IActionResult GetById(int id)
+        {
+            var result = _userService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         //[HttpPost("add")]
         //public IActionResult Add(User user)

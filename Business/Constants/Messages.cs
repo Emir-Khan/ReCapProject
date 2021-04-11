@@ -46,7 +46,9 @@ namespace Business.Constants
         public static string UserRegistered = "Kayıt başarılı";
         public static string AccessTokenCreated ="JWT Created";
         public static string AuthorizationDenied = "Reddedildi";
-
-        
+        internal static string RentalNotAvailable ="Seçtiğiniz tarihler arasında araç zaten kiralı";
+        internal static string RentalDateError="Seçtiğiniz tarihleri kontrol ediniz";
+        internal static string CardAdded;
+        internal static string CardDeleted;
     }
 }

@@ -2,12 +2,14 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -21,19 +23,18 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        
         public IResult Add(Rental rental)
         {
-            if (!(rental.ReturnDate == null))
+            var result = BusinessRules.Run(IsRentable(rental));
+            if (result != null)
             {
-                _rentalDal.Add(rental);
-                          
-                return new SuccessResult(Messages.RentalAdded);
+                return result;
             }
-            else
-            {
-                return new ErrorResult(Messages.RentalDenied);
-            }
+
+            _rentalDal.Add(rental);
+
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)
@@ -47,9 +48,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
-        public IDataResult<Rental> GetById(int id)
+        public IDataResult<RentalDetailDto> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+            var data = _rentalDal.GetRentalDetails();
+            return new SuccessDataResult<RentalDetailDto>(data.Find(r => r.Id == id));
         }
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
@@ -63,6 +65,27 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUptated);
         }
-        
+        [ValidationAspect(typeof(RentalValidator))]
+        public IResult IsRentable(Rental rental)
+        {
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+
+            if (result.Any(r =>
+                r.ReturnDate >= rental.RentDate &&
+                r.RentDate <= rental.ReturnDate
+            )) { 
+                return new ErrorResult(Messages.RentalNotAvailable);
+            }else if (rental.RentDate <= rental.ReturnDate)
+            {
+                return new SuccessResult();
+            }
+            else
+            {
+                return new ErrorResult(Messages.RentalDateError);
+            }
+
+            
+        }
+
     }
 }
