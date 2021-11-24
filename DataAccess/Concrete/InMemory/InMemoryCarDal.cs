@@ -16,9 +16,9 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
                 {
-                new Car {Id=1,BrandId=1,ColorId=1,CarName="bmw",ModelYear=2019,DailyPrice=200000,Description="2019'un en iyi arabası"},
-                new Car {Id=2,BrandId=2,ColorId=2,CarName="mercedes",ModelYear=2018,DailyPrice=180000,Description="2018'in en iyi arabası"},
-                new Car {Id=3,BrandId=3,ColorId=2,CarName="volvo",ModelYear=2017,DailyPrice=160000,Description="2017'nin en iyi arabası"}
+                new Car {CarId=1,BrandId=1,ColorId=1,CarName="bmw",ModelYear=2019,DailyPrice=200000,Description="2019'un en iyi arabası"},
+                new Car {CarId=2,BrandId=2,ColorId=2,CarName="mercedes",ModelYear=2018,DailyPrice=180000,Description="2018'in en iyi arabası"},
+                new Car {CarId=3,BrandId=3,ColorId=2,CarName="volvo",ModelYear=2017,DailyPrice=160000,Description="2017'nin en iyi arabası"}
                 };
         }
         public void Add(Car car)
@@ -30,7 +30,7 @@ namespace DataAccess.Concrete.InMemory
         public void Delete(Car car)
         {
             Car deleteCar = null;
-            deleteCar = _cars.SingleOrDefault(c => c.Id == car.Id);
+            deleteCar = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(deleteCar);
             Console.WriteLine($"{_cars.Count()} Arabanız kaldı");
             //Console.WriteLine(_cars.Count()+" Arabanız kaldı");
@@ -53,7 +53,7 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetById(Car car)
         {
-            return _cars.Where(c => c.Id == car.Id).ToList();
+            return _cars.Where(c => c.CarId == car.CarId).ToList();
         }
 
         public List<CarDetailDto> GetCarDetails()
@@ -73,7 +73,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            Car car1 = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car car1 = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             car1.BrandId = car.BrandId;
             car1.ColorId = car.ColorId;
             car1.ModelYear = car.ModelYear;

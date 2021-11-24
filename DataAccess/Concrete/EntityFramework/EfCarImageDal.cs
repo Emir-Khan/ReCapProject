@@ -17,11 +17,11 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from i in context.CarImages
                              join c in context.Cars
-                             on i.CarId equals c.Id
+                             on i.CarId equals c.CarId
                              select new CarImageDetailDto
                              {
                                  Id=i.Id,
-                                 CarId=c.Id,
+                                 CarId=c.CarId,
                                  ImagePath=i.ImagePath,
                                  Date=i.Date
                              };
