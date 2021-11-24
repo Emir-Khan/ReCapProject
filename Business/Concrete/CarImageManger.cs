@@ -24,10 +24,12 @@ namespace Business.Concrete
         }
 
         
-        public IResult Add(IFormFile file, CarImage carImage)
+        public IResult Add(IFormFile file, int carId)
         {
+            var carImage = new CarImage();
             carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
+            carImage.CarId = carId;
             _carImageDal.Add(carImage);
             return new SuccessResult();
         }

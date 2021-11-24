@@ -27,7 +27,7 @@ namespace Business.Concrete
             _carDal = carDal;           
         }
 
-        [CacheAspect]
+
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
@@ -47,7 +47,6 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin,car.add")]
-        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
