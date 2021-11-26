@@ -53,7 +53,15 @@ namespace Business.Concrete
             var data = _rentalDal.GetRentalDetails();
             return new SuccessDataResult<RentalDetailDto>(data.Find(r => r.Id == id));
         }
-
+        public IDataResult<List<Rental>> GetByUserId(int userId)
+        {
+            var data = _rentalDal.GetAll(r => r.UserId == userId);
+            if (data.FindAll(d=>d.UserId==userId).Count !=0)
+            {
+                return new SuccessDataResult<List<Rental>>(data.FindAll(d => d.UserId == userId));
+            }
+            return new ErrorDataResult<List<Rental>>();
+        }
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
@@ -86,6 +94,5 @@ namespace Business.Concrete
 
             
         }
-
     }
 }
