@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -8,6 +9,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        
         public static string CarAdded = "Araba eklendi";
         public static string CarUpdated = "Araba güncellendi";
         public static string CarDeleted = "Araba silindi";
@@ -34,9 +36,10 @@ namespace Business.Constants
 
         public static string RentalDenied = "Kiralama geçersiz";
 
-        public static string CarImageAdded = "Araba resimi eklendi";
-        public static string CarImageUpdated = "Araba resimi güncellendi";
-        public static string CarImageDeleted = "Araba resimi silindi";
+        public static string CarImageAdded = "Araba resmi eklendi";
+        public static string CarImageUpdated = "Araba resmi güncellendi";
+        public static string CarImageDeleted = "Araba resmi silindi";
+        public static string ImageNotFount = "Resim Bulunamadı";
 
         public static string CarNameAlreadyExists = "Araba ismi mevcut";
         public static string UserNotFound = "Email bulunamadı";
