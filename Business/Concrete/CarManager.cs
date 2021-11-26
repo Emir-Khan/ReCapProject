@@ -21,10 +21,11 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-
-        public CarManager(ICarDal carDal)
+        ICarImageService _carImageService;
+        public CarManager(ICarDal carDal, ICarImageService carImageService)
         {
-            _carDal = carDal;           
+            _carDal = carDal;
+            _carImageService = carImageService;
         }
 
 
@@ -50,7 +51,7 @@ namespace Business.Concrete
         public IResult Add(Car car)
         {
             var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
-            if (result!=null)
+            if (result != null)
             {
                 return result;
             }
@@ -84,16 +85,56 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+            return new SuccessDataResult<List<CarDetailDto>>(IsHasImage().Data);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarsByFilter(int colorId,int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByFilter(int colorId, int brandId)
         {
-            var cars =_carDal.GetCarDetails();
-            return new SuccessDataResult<List<CarDetailDto>>(cars.FindAll(p => p.BrandId == brandId&&p.ColorId==colorId));
+            var cars = _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(cars.FindAll(p => p.BrandId == brandId && p.ColorId == colorId));
         }
 
-
+        private IDataResult<List<CarDetailDto>> IsHasImage()
+        {
+            List<CarDetailDto> result = new List<CarDetailDto>();
+            var cars = _carDal.GetCarDetails();
+            for (int i = 0; i < cars.Count; i++)
+            {
+                if (_carImageService.GetByCarId(cars[i].CarId).Success)
+                {
+                    result.Add(new CarDetailDto()
+                    {
+                        CarId = cars[i].CarId,
+                        BrandId = cars[i].BrandId,
+                        ColorId = cars[i].ColorId,
+                        BrandName = cars[i].BrandName,
+                        CarName = cars[i].CarName,
+                        ColorName = cars[i].ColorName,
+                        DailyPrice = cars[i].DailyPrice,
+                        ModelYear = cars[i].ModelYear,
+                        Description = cars[i].Description,
+                        HasImage = true
+                    });
+                }
+                else
+                {
+                    result.Add(new CarDetailDto()
+                    {
+                        CarId = cars[i].CarId,
+                        BrandId = cars[i].BrandId,
+                        ColorId = cars[i].ColorId,
+                        BrandName = cars[i].BrandName,
+                        CarName = cars[i].CarName,
+                        ColorName = cars[i].ColorName,
+                        DailyPrice = cars[i].DailyPrice,
+                        ModelYear = cars[i].ModelYear,
+                        Description = cars[i].Description,
+                        HasImage = false
+                    });
+                }
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(result);
+        }
 
         private IResult CheckIfProductNameExists(string carName)
         {
@@ -105,5 +146,5 @@ namespace Business.Concrete
             return new SuccessResult();
         }
     }
-    
+
 }
