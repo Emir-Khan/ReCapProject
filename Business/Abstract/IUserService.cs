@@ -13,5 +13,6 @@ namespace Business.Abstract
         void Add(User user);
         User GetByMail(string email);
         IDataResult<User> GetById(int id);
+        IDataResult<List<User>> GetAll();
     }
 }

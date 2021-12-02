@@ -21,16 +21,16 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
-        //[HttpGet("getall")]
-        //public IActionResult GetAll()
-        //{
-        //    var result = _userService.GetAll();
-        //    if (result.Success)
-        //    {
-        //        return Ok(result);
-        //    }
-        //    return BadRequest(result);
-        //}
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _userService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         [HttpGet("get")]
         public IActionResult GetById(int id)
