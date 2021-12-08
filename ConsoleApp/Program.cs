@@ -13,7 +13,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //InMemoryTest();
-            CarManager carManager = new CarManager(new EfCarDal());
+            //CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
@@ -48,7 +48,7 @@ namespace ConsoleApp
 
             //carManager.Delete(new Car { Id = 3, ColorId = 1, BrandId = 3, CarName = "KIA", ModelYear = 2021, DailyPrice = 320, Description = "2021 Model KIA" });
 
-            GetCarDetailsTest(carManager);
+            //GetCarDetailsTest(carManager);
 
             //rentalManager.Add(new Rental { Id = 1, CarId = 1, CustomerId = 1, RentDate = new DateTime(2019, 3, 25, 8, 50, 29), ReturnDate = new DateTime(2019, 3, 25, 19, 37, 51) });
             //userManager.Add(new User { Id = 1, FirstName = "Emirhan", LastName = "Köseoğlu", Email = "ajbfqeuo@gmail.com", Password = "!2a3456" });

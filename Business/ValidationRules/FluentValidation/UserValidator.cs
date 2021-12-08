@@ -12,6 +12,7 @@ namespace Business.ValidationRules.FluentValidation
         public UserValidator()
         {
             RuleFor(u => u.Email).NotEmpty();
+            RuleFor(u => u.Email).EmailAddress().WithMessage("Geçerli Bir Email Adresi Giriniz");
             RuleFor(u => u.Email).Must(EndsWith).WithMessage("Email .com ile bitmeli");
 
             RuleFor(u => u.FirstName).NotEmpty();

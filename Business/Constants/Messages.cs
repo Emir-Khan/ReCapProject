@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace Business.Constants
         public static string CarImageAdded = "Araba resmi eklendi";
         public static string CarImageUpdated = "Araba resmi güncellendi";
         public static string CarImageDeleted = "Araba resmi silindi";
-        public static string ImageNotFount = "Resim Bulunamadı";
+        public static string ImageNotFound = "Resim Bulunamadı";
 
         public static string CarNameAlreadyExists = "Araba ismi mevcut";
         public static string UserNotFound = "Email bulunamadı";
@@ -53,5 +54,7 @@ namespace Business.Constants
         public static string RentalDateError="Seçtiğiniz tarihleri kontrol ediniz";
         public static string CardAdded ="Araba Eklendi";
         public static string CardDeleted ="Araba Silindi";
+
+        public static string RentalCanNotFind = "Kullanıcı Henüz Araç kiralamamış";
     }
 }

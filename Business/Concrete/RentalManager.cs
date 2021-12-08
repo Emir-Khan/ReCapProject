@@ -56,11 +56,13 @@ namespace Business.Concrete
         public IDataResult<List<Rental>> GetByUserId(int userId)
         {
             var data = _rentalDal.GetAll(r => r.UserId == userId);
-            if (data.FindAll(d=>d.UserId==userId).Count !=0)
+
+            if ( data.Count !=0)
             {
-                return new SuccessDataResult<List<Rental>>(data.FindAll(d => d.UserId == userId));
+                return new SuccessDataResult<List<Rental>>(data);
             }
-            return new ErrorDataResult<List<Rental>>();
+
+            return new ErrorDataResult<List<Rental>>(Messages.RentalCanNotFind);
         }
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {

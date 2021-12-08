@@ -18,7 +18,7 @@ namespace Business.ValidationRules.FluentValidation
         private bool DateCheck(DateTime arg)
         {
             DateTime nowDate = DateTime.Now;
-            if (arg > nowDate)
+            if (arg >= nowDate)
             {
                 return true;
             }

@@ -59,7 +59,7 @@ namespace Business.Concrete
             {
                 return new SuccessDataResult<List<CarImageDetailDto>>(img.FindAll(c => c.CarId == id));
             }
-            return new ErrorDataResult<List<CarImageDetailDto>>(Messages.ImageNotFount);
+            return new ErrorDataResult<List<CarImageDetailDto>>(Messages.ImageNotFound);
         }
 
         public IDataResult<List<CarImageDetailDto>> GetCarImageDetails()
