@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinsessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -30,7 +31,7 @@ namespace Business.Concrete
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
-
+        [SecuredOperation("admin,user.delete")]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);

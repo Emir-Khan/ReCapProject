@@ -34,6 +34,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
+        [SecuredOperation("admin,car.delete")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
