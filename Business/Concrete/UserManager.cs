@@ -31,6 +31,7 @@ namespace Business.Concrete
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
+
         [SecuredOperation("admin,user.delete")]
         public IResult Delete(User user)
         {
