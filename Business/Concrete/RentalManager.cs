@@ -23,7 +23,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        
+
         public IResult Add(Rental rental)
         {
             var result = BusinessRules.Run(IsRentable(rental));
@@ -31,7 +31,8 @@ namespace Business.Concrete
             {
                 return result;
             }
-
+            rental.RentDate = rental.RentDate.ToLocalTime();
+            rental.ReturnDate = rental.ReturnDate.ToLocalTime();
             _rentalDal.Add(rental);
 
             return new SuccessResult(Messages.RentalAdded);
@@ -57,7 +58,7 @@ namespace Business.Concrete
         {
             var data = _rentalDal.GetAll(r => r.UserId == userId);
 
-            if ( data.Count !=0)
+            if (data.Count != 0)
             {
                 return new SuccessDataResult<List<Rental>>(data);
             }
@@ -83,9 +84,11 @@ namespace Business.Concrete
             if (result.Any(r =>
                 r.ReturnDate >= rental.RentDate &&
                 r.RentDate <= rental.ReturnDate
-            )) { 
+            ))
+            {
                 return new ErrorResult(Messages.RentalNotAvailable);
-            }else if (rental.RentDate <= rental.ReturnDate)
+            }
+            else if (rental.RentDate <= rental.ReturnDate)
             {
                 return new SuccessResult();
             }
@@ -94,7 +97,7 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.RentalDateError);
             }
 
-            
+
         }
     }
 }
