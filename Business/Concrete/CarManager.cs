@@ -74,28 +74,28 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetByColorId(int colorId)
         {
-            var result = _carDal.GetCarDetails();
+            var result = IsHasImage();
             return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.ColorId == colorId));
         }
 
         public IDataResult<List<CarDetailDto>> GetByBrandId(int brandId)
         {
-            var brand = _carDal.GetCarDetails();
+            var brand = IsHasImage();
             return new SuccessDataResult<List<CarDetailDto>>(brand.FindAll(c => c.BrandId == brandId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(IsHasImage().Data);
+            return new SuccessDataResult<List<CarDetailDto>>(IsHasImage());
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByFilter(int colorId, int brandId)
         {
-            var cars = _carDal.GetCarDetails();
+            var cars = IsHasImage();
             return new SuccessDataResult<List<CarDetailDto>>(cars.FindAll(p => p.BrandId == brandId && p.ColorId == colorId));
         }
 
-        private IDataResult<List<CarDetailDto>> IsHasImage()
+        private List<CarDetailDto> IsHasImage()
         {
             List<CarDetailDto> result = new List<CarDetailDto>();
             var cars = _carDal.GetCarDetails();
@@ -134,7 +134,7 @@ namespace Business.Concrete
                     });
                 }
             }
-            return new SuccessDataResult<List<CarDetailDto>>(result);
+            return result;
         }
 
         private IResult CheckIfProductNameExists(string carName)
