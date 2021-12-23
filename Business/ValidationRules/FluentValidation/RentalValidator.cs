@@ -12,13 +12,13 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(r => r.CarId).NotEmpty();
             RuleFor(r => r.UserId).NotEmpty();
-            RuleFor(r => r.RentDate).NotEmpty().Must(DateCheck).WithMessage("Bir Sorun Oluştu");
+            RuleFor(r => r.RentDate).NotEmpty().Must(DateCheck).WithMessage("Tarih Hatası");
             
         }
         private bool DateCheck(DateTime arg)
         {
             DateTime nowDate = DateTime.Now;
-            if (arg >= nowDate)
+            if (arg.ToLocalTime() >= nowDate)
             {
                 return true;
             }
