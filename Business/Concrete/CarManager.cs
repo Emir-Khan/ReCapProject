@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -49,6 +50,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("admin,car.add")]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
@@ -60,16 +62,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
-        public IDataResult<List<CarDetailDto>> GetById(int id)
+        public async Task<IDataResult<List<CarDetailDto>>> GetById(int id)
         {
-            var result = _carDal.GetCarDetails();
+            var result = await _carDal.GetCarDetails();
             return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.CarId == id));
         }
 
         public IDataResult<CarDetailDto> GetBySingleId(int id)
         {
             var result = _carDal.GetCarDetails();
-            return new SuccessDataResult<CarDetailDto>(result.Find(c => c.CarId == id));
+            return new SuccessDataResult<CarDetailDto>(result.Result.Find(c => c.CarId == id));
         }
 
         public IDataResult<List<CarDetailDto>> GetByColorId(int colorId)
@@ -99,21 +101,21 @@ namespace Business.Concrete
         {
             List<CarDetailDto> result = new List<CarDetailDto>();
             var cars = _carDal.GetCarDetails();
-            for (int i = 0; i < cars.Count; i++)
+            for (int i = 0; i < cars.Result.Count; i++)
             {
-                if (_carImageService.GetByCarId(cars[i].CarId).Success)
+                if (_carImageService.GetByCarId(cars.Result[i].CarId).Success)
                 {
                     result.Add(new CarDetailDto()
                     {
-                        CarId = cars[i].CarId,
-                        BrandId = cars[i].BrandId,
-                        ColorId = cars[i].ColorId,
-                        BrandName = cars[i].BrandName,
-                        CarName = cars[i].CarName,
-                        ColorName = cars[i].ColorName,
-                        DailyPrice = cars[i].DailyPrice,
-                        ModelYear = cars[i].ModelYear,
-                        Description = cars[i].Description,
+                        CarId = cars.Result[i].CarId,
+                        BrandId = cars.Result[i].BrandId,
+                        ColorId = cars.Result[i].ColorId,
+                        BrandName = cars.Result[i].BrandName,
+                        CarName = cars.Result[i].CarName,
+                        ColorName = cars.Result[i].ColorName,
+                        DailyPrice = cars.Result[i].DailyPrice,
+                        ModelYear = cars.Result[i].ModelYear,
+                        Description = cars.Result[i].Description,
                         HasImage = true
                     });
                 }
@@ -121,15 +123,15 @@ namespace Business.Concrete
                 {
                     result.Add(new CarDetailDto()
                     {
-                        CarId = cars[i].CarId,
-                        BrandId = cars[i].BrandId,
-                        ColorId = cars[i].ColorId,
-                        BrandName = cars[i].BrandName,
-                        CarName = cars[i].CarName,
-                        ColorName = cars[i].ColorName,
-                        DailyPrice = cars[i].DailyPrice,
-                        ModelYear = cars[i].ModelYear,
-                        Description = cars[i].Description,
+                        CarId = cars.Result[i].CarId,
+                        BrandId = cars.Result[i].BrandId,
+                        ColorId = cars.Result[i].ColorId,
+                        BrandName = cars.Result[i].BrandName,
+                        CarName = cars.Result[i].CarName,
+                        ColorName = cars.Result[i].ColorName,
+                        DailyPrice = cars.Result[i].DailyPrice,
+                        ModelYear = cars.Result[i].ModelYear,
+                        Description = cars.Result[i].Description,
                         HasImage = false
                     });
                 }
@@ -146,6 +148,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+
     }
 
 }

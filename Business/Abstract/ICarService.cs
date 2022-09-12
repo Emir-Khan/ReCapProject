@@ -4,6 +4,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
@@ -14,7 +15,7 @@ namespace Business.Abstract
         IResult Update(Car car);
         IResult Add(Car car);
         IDataResult<CarDetailDto> GetBySingleId(int id);
-        IDataResult<List<CarDetailDto>> GetById(int id);
+        Task<IDataResult<List<CarDetailDto>>> GetById(int id);
         IDataResult<List<CarDetailDto>> GetByColorId(int colorId);
         IDataResult<List<CarDetailDto>> GetByBrandId(int brandId);
         IDataResult<List<CarDetailDto>> GetCarsByFilter(int branId, int colorId);

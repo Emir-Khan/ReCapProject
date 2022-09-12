@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, CarsContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public async Task<List<CarDetailDto>> GetCarDetails()
         {
             using (CarsContext context = new CarsContext())
             {
@@ -34,7 +35,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = p.ModelYear,
                                  Description = p.Description
                              };
-                return result.ToList();
+                return await result.ToListAsync();
             }
         }
         

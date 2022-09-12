@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("get")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var result = _carService.GetById(id);
+            var result = await _carService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
