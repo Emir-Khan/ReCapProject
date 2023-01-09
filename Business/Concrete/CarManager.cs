@@ -28,11 +28,10 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
-        {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
-        }
+        =>new SuccessDataResult<List<Car>>(_carDal.GetAll());
+        
 
         [SecuredOperation("admin,car.delete")]
         public IResult Delete(Car car)
@@ -48,7 +47,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        [SecuredOperation("admin,car.add")]
+        //[SecuredOperation("admin,car.add")]
         public IResult Add(Car car)
         {
             var result = BusinessRules.Run(CheckIfProductNameExists(car.CarName));
@@ -59,8 +58,8 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
-
-        public IDataResult<List<CarDetailDto>> GetById(int id)
+    [CacheAspect]
+    public IDataResult<List<CarDetailDto>> GetById(int id)
         {
             var result = _carDal.GetCarDetails();
             return new SuccessDataResult<List<CarDetailDto>>(result.FindAll(c => c.CarId == id));
